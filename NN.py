@@ -644,81 +644,82 @@ def classification_error(prediction, label):
 
 
 ####################################
+if __name__ == '__main__':
 
-# ONLY LOAD IF .npy files not stored!!
-# data = load_data()
+	# ONLY LOAD IF .npy files not stored!!
+	# data = load_data()
 
-#normalize if needed
-x_train = (np.load('x_train.npy'))
-y_train = (np.load('y_train.npy'))
-x_valid = (np.load('x_valid.npy'))
-y_valid = (np.load('y_valid.npy'))
-x_test = (np.load('x_test.npy'))
-y_test = (np.load('y_test.npy'))
-# store data in a dictionary
-data = {'x_train': x_train, 'y_train': y_train, 'x_valid': x_valid, 'y_valid': y_valid, 'x_test': x_test, 'y_valid': y_valid}
+	#normalize if needed
+	x_train = (np.load('x_train.npy'))
+	y_train = (np.load('y_train.npy'))
+	x_valid = (np.load('x_valid.npy'))
+	y_valid = (np.load('y_valid.npy'))
+	x_test = (np.load('x_test.npy'))
+	y_test = (np.load('y_test.npy'))
+	# store data in a dictionary
+	data = {'x_train': x_train, 'y_train': y_train, 'x_valid': x_valid, 'y_valid': y_valid, 'x_test': x_test, 'y_valid': y_valid}
 
-######################################
+	######################################
 
-for i in range(8,9):
+	for i in range(8,9):
 
-    #specifiy net architecture: .e.g.: 784 inputs, first hidden layer 500 nodes, second one 300 nodes, output 10
-    net = NN([784,100,10], x_train)
-    # specify initial learning rate
-    l_rate = 0.1
-    # momentum parameter
-    beta_1 = 0.9
-    # RMSProp/Adam parameter
-    beta_2 = 0.98
-    # variance square root regularizer
-    eps = 0.0000001
-    # regularizer
-    lambd = 0.1
-    # batch sample size
-    batch_size = 64
-    # activation function: net.sigmoid, net.relu, net.tanh
-    activation_fun = net.sigmoid
-    # activation function derivative: net.d_sigmoid, net.d_relu, net.d_tanh
-    activation_fun_g = net.d_sigmoid
-    # output function: net.softmax
-    output_fun = net.softmax
-    # Specify optimizer: Adam, Standard or Momentum (Standard with Momentum)
-    optimization_function = 'Momentum'
-    # batch normalization on or off
-    batchnorm_on = False
-    # learning rate decay on or off (divides main learning rate by 1.5 if validation error stays constant
-    lrate_decay_on = True
-    # number of training epochs
-    n_epochs = 100
-    # path to save figure and data
-    path = '/home/max/PyCharm/PycharmProjects/10-707/hw2/figures/pretraining/'
+	    #specifiy net architecture: .e.g.: 784 inputs, first hidden layer 500 nodes, second one 300 nodes, output 10
+	    net = NN([784,100,10], x_train)
+	    # specify initial learning rate
+	    l_rate = 0.1
+	    # momentum parameter
+	    beta_1 = 0.9
+	    # RMSProp/Adam parameter
+	    beta_2 = 0.98
+	    # variance square root regularizer
+	    eps = 0.0000001
+	    # regularizer
+	    lambd = 0.1
+	    # batch sample size
+	    batch_size = 64
+	    # activation function: net.sigmoid, net.relu, net.tanh
+	    activation_fun = net.sigmoid
+	    # activation function derivative: net.d_sigmoid, net.d_relu, net.d_tanh
+	    activation_fun_g = net.d_sigmoid
+	    # output function: net.softmax
+	    output_fun = net.softmax
+	    # Specify optimizer: Adam, Standard or Momentum (Standard with Momentum)
+	    optimization_function = 'Momentum'
+	    # batch normalization on or off
+	    batchnorm_on = False
+	    # learning rate decay on or off (divides main learning rate by 1.5 if validation error stays constant
+	    lrate_decay_on = True
+	    # number of training epochs
+	    n_epochs = 100
+	    # path to save figure and data
+	    path = '/home/max/PyCharm/PycharmProjects/10-707/hw2/figures/pretraining/'
 
-    ####################################
+	    ####################################
 
-    # initialize network and execute training
-    net.set_hyperparams(l_rate, beta_1, beta_2, eps, lambd, batch_size, activation_fun, activation_fun_g, output_fun,
-                        optimization_function, batchnorm_on, lrate_decay_on)
-    loss_tracker, error_tracker = net.train(n_epochs, data)
+	    # initialize network and execute training
+	    net.set_hyperparams(l_rate, beta_1, beta_2, eps, lambd, batch_size, activation_fun, activation_fun_g, output_fun,
+	                        optimization_function, batchnorm_on, lrate_decay_on)
+	    loss_tracker, error_tracker = net.train(n_epochs, data)
 
-    # calculate loss on test set
-    # loss_train = net.calculate_loss(x_train, y_train)
-    # out = net.h[net.layers]
-    # err_train = classification_error(out, y_train)
-    # loss_valid = net.calculate_loss(x_valid, y_valid)
-    # out = net.h[net.layers]
-    # err_valid = classification_error(out, y_valid)
-    # loss_test = net.calculate_loss(x_test, y_test)
-    # out = net.h[net.layers]
-    # err_test = classification_error(out, y_test)
-    #
-    # np.save(path + 'err_train.npy', err_train)
-    # np.save(path + 'loss_train.npy', loss_train)
-    # np.save(path + 'err_valid.npy', err_valid)
-    # np.save(path + 'loss_valid.npy', loss_valid)
-    # np.save(path + 'err_test.npy', err_test)
-    # np.save(path + 'loss_test.npy', loss_test)
-    # np.save(path + 'W.npy', net.W[1])
+	    # calculate loss on test set
+	    # loss_train = net.calculate_loss(x_train, y_train)
+	    # out = net.h[net.layers]
+	    # err_train = classification_error(out, y_train)
+	    # loss_valid = net.calculate_loss(x_valid, y_valid)
+	    # out = net.h[net.layers]
+	    # err_valid = classification_error(out, y_valid)
+	    # loss_test = net.calculate_loss(x_test, y_test)
+	    # out = net.h[net.layers]
+	    # err_test = classification_error(out, y_test)
+	    #
+	    # np.save(path + 'err_train.npy', err_train)
+	    # np.save(path + 'loss_train.npy', loss_train)
+	    # np.save(path + 'err_valid.npy', err_valid)
+	    # np.save(path + 'loss_valid.npy', loss_valid)
+	    # np.save(path + 'err_test.npy', err_test)
+	    # np.save(path + 'loss_test.npy', loss_test)
+	    # np.save(path + 'W.npy', net.W[1])
 
-    plotting(path)
-    # visualize_params(net)
-    plt.show()
+	    plotting(path)
+	    # visualize_params(net)
+	    plt.show()
